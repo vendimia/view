@@ -1,0 +1,24 @@
+{
+    "name": "vendimia/view",
+    "description": "Simple PHP view render engine",
+    "require": {
+        "php": ">=8.1",
+        "vendimia/html": "*",
+        "vendimia/http": "*",
+        "vendimia/core": "*",
+        "vendimia/session": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vendimia\\View\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oliver Etchebarne",
+            "email": "yo@drmad.org",
+            "homepage": "https://drmad.org",
+            "role": "developer"
+        }
+    ]
+}
