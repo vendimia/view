@@ -19,7 +19,7 @@ class View
     private $view_file = null;
 
     /** Layout source file */
-    private $layout;
+    private $layout = null;
 
     /** Processed layout file name */
     private $layout_file = null;
@@ -61,10 +61,8 @@ class View
         $this->args = [...$this->args, ...$args];
     }
 
-    /**
-     * Generates a Vendimia\Http\Response from the processed view
-     */
-    public function render(): Response
+
+    public function render(): string
     {
         // Verificamos que el source y el layout existan
         $this->view_file = $this->resource_locator->find(
@@ -79,16 +77,18 @@ class View
             );
         }
 
-        $this->layout_file = $this->resource_locator->find(
-            $this->layout,
-            type: 'layout',
-            ext: 'php',
-        );
-        if (is_null($this->layout_file)) {
-            throw new ResourceNotFoundException(
-                "Layout source '{$this->layout}' not found",
-                paths: $this->resource_locator->getLastSearchedPaths(),
+        if ($this->layout) {
+            $this->layout_file = $this->resource_locator->find(
+                $this->layout,
+                type: 'layout',
+                ext: 'php',
             );
+            if (is_null($this->layout_file)) {
+                throw new ResourceNotFoundException(
+                    "Layout source '{$this->layout}' not found",
+                    paths: $this->resource_locator->getLastSearchedPaths(),
+                );
+            }
         }
 
         $html = new Html(
@@ -122,8 +122,15 @@ class View
             $html->addJs($this->project->method);
         }
 
+        return $html->render();
+    }
 
-        $payload = $html->render();
+     /**
+     * Generates a Vendimia\Http\Response from the rendered view
+     */
+    public function renderResponse(): Response
+    {
+        $payload = $this->render();
 
         $response = Response::fromString($payload)
             ->withHeader('Content-Type', 'text/html')
