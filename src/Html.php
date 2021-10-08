@@ -34,7 +34,7 @@ class Html
     public function __construct(
         private string $view_file,
         private array $args,
-        private string $layout_file,
+        private ?string $layout_file,
         private ProjectInfo $project,
         private ResourceLocatorInterface $resource_locator,
         private ?AlertMessages $messages,
@@ -59,10 +59,14 @@ class Html
         require $this->view_file;
         $this->content = ob_get_clean();
 
-        // Lo incluimos en la plantilla
-        ob_start();
-        require $this->layout_file;
-        $this->html = ob_get_clean();
+        // Lo incluimos en el layout, si es que hay
+        if ($this->layout_file) {
+            ob_start();
+            require $this->layout_file;
+            $this->html = ob_get_clean();
+        } else {
+            $this->html = $this->content;
+        }
 
         return $this->html;
     }
