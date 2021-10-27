@@ -101,25 +101,27 @@ class View
         );
 
         // Si hay un CSS con el mismo nombre del método, lo añadimos
-        $found = $this->resource_locator->find(
-            $this->project->method,
-            type: 'css',
-            ext: ['css', 'scss'],
-        );
+        if ($this->project->method) {
+            $found = $this->resource_locator->find(
+                $this->project->method,
+                type: 'css',
+                ext: ['css', 'scss'],
+            );
 
-        if ($found) {
-            $html->addCss($this->project->method);
-        }
+            if ($found) {
+                $html->addCss($this->project->method);
+            }
 
-        // Si hay un JS con el mismo nombre del método, lo añadimos
-        $found = $this->resource_locator->find(
-            $this->project->method,
-            type: 'js',
-            ext: ['js'],
-        );
+            // Si hay un JS con el mismo nombre del método, lo añadimos
+            $found = $this->resource_locator->find(
+                $this->project->method,
+                type: 'js',
+                ext: ['js'],
+            );
 
-        if ($found) {
-            $html->addJs($this->project->method);
+            if ($found) {
+                $html->addJs($this->project->method);
+            }
         }
 
         return $html->render();
