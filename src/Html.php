@@ -71,6 +71,11 @@ class Html
         return $this->html;
     }
 
+    public function getContent()
+    {
+        return $this->content;
+    }
+
     /**
      * Adds one or multiple CSS sources
      */
@@ -139,6 +144,17 @@ class Html
     }
 
     /**
+     * Adds an individual <SCRIPT> tag for this local source
+     */
+    public function addScript($source, ...$attributes)
+    {
+        $this->script_tags[] = [
+            'src' => "assets/js/{$this->project->module}:{$source}",
+            ...$attributes,
+        ];
+    }
+
+    /**
      * Adds a <SCRIPT> tag with a URL.
      */
     public function addExternalScript($href, ...$attributes)
@@ -147,6 +163,25 @@ class Html
             'src' => $href,
             ...$attributes,
         ];
+    }
+
+    /**
+     * Changes the layout
+     */
+    public function setLayout($layout)
+    {
+        $this->layout_file = $this->resource_locator->find(
+            $layout,
+            type: 'layout',
+            ext: 'php',
+        );
+        if (is_null($this->layout_file)) {
+            throw new ResourceNotFoundException(
+                "Layout source '{$layout}' not found",
+                paths: $this->resource_locator->getLastSearchedPaths(),
+            );
+        }
+
     }
 
     /**
