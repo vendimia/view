@@ -12,8 +12,11 @@ use Vendimia\Http\Response;
  */
 class View
 {
+    /** Source name for default resources */
+    private $source = null;
+
     /** View source file */
-    private $view;
+    private $view = null;
 
     /** Processed view file name */
     private $view_file = null;
@@ -37,16 +40,28 @@ class View
     }
 
     /**
-     * Sets a source file
+     * Sets a source file for all resources.
+     *
+     * This method will always overwrite the view source.
      */
-    public function setSource($file): self
+    public function setSource($source): self
+    {
+        $this->source = $source;
+        $this->view = $source;
+        return $this;
+    }
+
+    /**
+     * Sets a view file source
+     */
+    public function setView($file): self
     {
         $this->view = $file;
         return $this;
     }
 
     /**
-     * Sets a layout file
+     * Sets a layout file source
      */
     public function setLayout($file)
     {
@@ -101,26 +116,28 @@ class View
         );
 
         // Si hay un CSS con el mismo nombre del método, lo añadimos
-        if ($this->project->method) {
+        if ($this->source) {
             $found = $this->resource_locator->find(
-                $this->project->method,
+                $this->source,
                 type: 'css',
                 ext: ['css', 'scss'],
+                return_relative_resource_name: true,
             );
 
             if ($found) {
-                $html->addCss($this->project->method);
+                $html->addCss($found);
             }
 
             // Si hay un JS con el mismo nombre del método, lo añadimos
             $found = $this->resource_locator->find(
-                $this->project->method,
+                $this->source,
                 type: 'js',
                 ext: ['js'],
+                return_relative_resource_name: true,
             );
 
             if ($found) {
-                $html->addJs($this->project->method);
+                $html->addJs($found);
             }
         }
 
