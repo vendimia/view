@@ -3,8 +3,8 @@ namespace Vendimia\View;
 
 use Vendimia\Session\SessionManager;
 
-/** 
- * 
+/**
+ *
  */
 class AlertMessages
 {
@@ -23,6 +23,10 @@ class AlertMessages
         string $icon = '',
         array $options = []
     ) {
+        if (!$this->session['vendimia-alertmessages']) {
+            $this->session['vendimia-alertmessages'] = [];
+        }
+
         $this->session['vendimia-alertmessages'][] = [
             'content' => $content,
             'type' => strtolower($type->name),
@@ -42,10 +46,10 @@ class AlertMessages
     }
 
     /**
-     * 
+     *
      */
     public function success(
-        string $content, 
+        string $content,
         string $extra = '',
         string $icon = '',
         array $options = []
@@ -55,10 +59,10 @@ class AlertMessages
     }
 
     /**
-     * 
+     *
      */
     public function info(
-        string $content, 
+        string $content,
         string $extra = '',
         string $icon = '',
         array $options = []
@@ -68,10 +72,10 @@ class AlertMessages
     }
 
     /**
-     * 
+     *
      */
     public function warning(
-        string $content, 
+        string $content,
         string $extra = '',
         string $icon = '',
         array $options = []
@@ -81,10 +85,10 @@ class AlertMessages
     }
 
     /**
-     * 
+     *
      */
     public function error(
-        string $content, 
+        string $content,
         string $extra = '',
         string $icon = '',
         array $options = []
