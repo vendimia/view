@@ -1,10 +1,12 @@
 <?php
+
 namespace Vendimia\View;
 
 use Vendimia\Html\Tag;
 use Vendimia\Core\ProjectInfo;
 use Vendimia\Interface\Path\ResourceLocatorInterface;
 use Vendimia\Exception\ResourceNotFoundException;
+
 use const Vendimia\WEB_ROOT;
 
 /**
@@ -23,6 +25,7 @@ class Html
     private $meta_tags = [];
     private $link_tags = [];
     private $script_tags = [];
+    private $title = null;
 
 
     /** Parsed body content, for inclusion in the layout */
@@ -294,6 +297,22 @@ class Html
     public function getWebRoot()
     {
         return WEB_ROOT;
+    }
+
+    /**
+     * Sets this web page title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Gets this web page title
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
