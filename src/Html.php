@@ -8,6 +8,7 @@ use Vendimia\Interface\Path\ResourceLocatorInterface;
 use Vendimia\Exception\ResourceNotFoundException;
 
 use const Vendimia\WEB_ROOT;
+use const Vendimia\PUBLIC_URL;
 
 /**
  * HTML support library
@@ -169,6 +170,14 @@ class Html
     }
 
     /**
+     * Prepends constant Vendimia\PUBLIC_URL to $url, if exists.
+     */
+    public function publicUrl($url)
+    {
+        return PUBLIC_URL . '/' . $url;
+    }
+
+    /**
      * Changes the layout
      */
     public function setLayout($layout)
@@ -269,6 +278,7 @@ class Html
 
         return join("\n", $html) . "\n";
     }
+
     /**
      * Renders the <SCRIPT> tags, including local JavaScripts.
      */
