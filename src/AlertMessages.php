@@ -36,7 +36,7 @@ class AlertMessages
         ];
     }
 
-    public function retrieveMessages(): array
+    public function retrieve(): array
     {
         $messages = $this->session['vendimia-alertmessages'] ?? [];
 
