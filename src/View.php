@@ -34,7 +34,7 @@ class View
         private ObjectManager $object,
         private ResourceLocatorInterface $resource_locator,
         private ProjectInfo $project,
-        private ?AlertMessages $messages,
+        private ?AlertMessages $messages = null,
     ) {
 
     }
