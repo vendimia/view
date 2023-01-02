@@ -88,7 +88,7 @@ class View
         if (is_null($this->view_file)) {
             throw new ResourceNotFoundException(
                 "View source '{$this->view}' not found",
-                paths: $this->resource_locator->getLastSearchedPaths(),
+                searched_paths: $this->resource_locator->getLastSearchedPaths(),
             );
         }
 
@@ -101,7 +101,7 @@ class View
             if (is_null($this->layout_file)) {
                 throw new ResourceNotFoundException(
                     "Layout source '{$this->layout}' not found",
-                    paths: $this->resource_locator->getLastSearchedPaths(),
+                    searched_paths: $this->resource_locator->getLastSearchedPaths(),
                 );
             }
         }
@@ -144,7 +144,7 @@ class View
         return $html->render();
     }
 
-     /**
+    /**
      * Generates a Vendimia\Http\Response from the rendered view
      */
     public function renderResponse(): Response
