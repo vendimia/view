@@ -7,6 +7,8 @@ use Vendimia\Core\ProjectInfo;
 use Vendimia\Exception\ResourceNotFoundException;
 use Vendimia\Http\Response;
 
+use const Vendimia\DEBUG;
+
 /**
  * Simple PHP view rendering engine
  */
@@ -157,5 +159,21 @@ class View
         ;
 
         return $response;
+    }
+
+    /**
+     * Renders a HTTP status code special view.
+     */
+    public function renderHttpStatus($code, $args): noreturn
+    {
+        $source = '::http-status/' . $code;
+
+        if (DEBUG) {
+            $source .= '-debug';
+        }
+        $this->setSource($source);
+        $this->addArguments($args);
+        $this->renderResponse()->withStatus($code)->send();
+        exit;
     }
 }
