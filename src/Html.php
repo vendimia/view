@@ -170,12 +170,22 @@ class Html
     }
 
     /**
-     * Prepends constant Vendimia\PUBLIC_URL to $url, if exists.
+     * Alias of self::public($url)
+     * @Deprecated
      */
     public function publicUrl($url)
     {
         return PUBLIC_URL . '/' . $url;
     }
+
+    /**
+     * Prepends Vendimia\PUBLIC_URL to $url
+     */
+    public function public($url)
+    {
+        return PUBLIC_URL . '/' . $url;
+    }
+
 
     /**
      * Changes the layout
