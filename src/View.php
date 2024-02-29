@@ -164,7 +164,7 @@ class View
     /**
      * Renders a HTTP status code special view.
      */
-    public function renderHttpStatus($code, $args): noreturn
+    public function renderHttpStatus($code, $args = []): noreturn
     {
         $source = '::http-status/' . $code;
 
