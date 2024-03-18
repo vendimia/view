@@ -148,6 +148,19 @@ class Html
     }
 
     /**
+     * Adds a <META> script with a non-official 'property' attribute.
+     */
+    public function addMetaHttpEquiv($pragma, $content, ...$attributes)
+    {
+        $this->meta_tags[] = [
+            'http-equiv' => $pragma,
+            'content' => $content,
+            ...$attributes,
+        ];
+    }
+
+
+    /**
      * Adds an individual <SCRIPT> tag for this local source
      */
     public function addScript($source, ...$attributes)
