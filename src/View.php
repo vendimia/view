@@ -78,7 +78,6 @@ class View
         $this->args = [...$this->args, ...$args];
     }
 
-
     public function render(): string
     {
         // Verificamos que el source y el layout existan
@@ -87,6 +86,7 @@ class View
             type: 'view',
             ext: 'php',
         );
+
         if (is_null($this->view_file)) {
             throw new ResourceNotFoundException(
                 "View source '{$this->view}' not found",
