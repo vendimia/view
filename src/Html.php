@@ -113,6 +113,15 @@ class Html
     }
 
     /**
+     * Adds one or multiple JavaScript sources loaded with 'defer'
+     */
+    public function addDeferredJs(...$sources) {
+        foreach ($sources as $source) {
+            $this->addScript($source, defer: true);
+        }
+    }
+
+    /**
      * Adds a <LINK> tag
      */
     public function addLink($href, $rel, ...$attributes) {

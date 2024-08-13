@@ -141,6 +141,20 @@ class View
             if ($found) {
                 $html->addJs($found);
             }
+
+            // Buscamos también un JS con __defer
+            $found = $this->resource_locator->find(
+                $this->source . '__defer',
+                type: 'js',
+                ext: ['js'],
+                return_relative_resource_name: true,
+            );
+
+            if ($found) {
+                $html->addDeferredJs($found);
+            }
+
+
         }
 
         return $html->render();
