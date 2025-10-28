@@ -1,4 +1,5 @@
 <?php
+
 namespace Vendimia\View;
 
 use Vendimia\ObjectManager\ObjectManager;
@@ -89,7 +90,7 @@ class View
 
         if (is_null($this->view_file)) {
             throw new ResourceNotFoundException(
-                "View source '{$this->view}' not found",
+                "View source '{$this->view}' not found", extra: [
                     "searched_paths" => $this->resource_locator->getLastSearchedPaths(),
                 ],
             );
