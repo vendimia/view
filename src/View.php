@@ -90,7 +90,8 @@ class View
         if (is_null($this->view_file)) {
             throw new ResourceNotFoundException(
                 "View source '{$this->view}' not found",
-                searched_paths: $this->resource_locator->getLastSearchedPaths(),
+                    "searched_paths" => $this->resource_locator->getLastSearchedPaths(),
+                ],
             );
         }
 
@@ -102,8 +103,9 @@ class View
             );
             if (is_null($this->layout_file)) {
                 throw new ResourceNotFoundException(
-                    "Layout source '{$this->layout}' not found",
-                    searched_paths: $this->resource_locator->getLastSearchedPaths(),
+                    "Layout source '{$this->layout}' not found", extra: [
+                        "searched_paths" => $this->resource_locator->getLastSearchedPaths(),
+                    ],
                 );
             }
         }

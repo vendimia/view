@@ -221,8 +221,9 @@ class Html
         );
         if (is_null($this->layout_file)) {
             throw new ResourceNotFoundException(
-                "Layout source '{$layout}' not found",
-                paths: $this->resource_locator->getLastSearchedPaths(),
+                "Layout source '{$layout}' not found", extra: [
+                    "searched_paths" => $this->resource_locator->getLastSearchedPaths(),
+                ],
             );
         }
 
@@ -241,8 +242,9 @@ class Html
 
         if (is_null($source_file)) {
             throw new ResourceNotFoundException(
-                "Included view source '{$source}' not found",
-                paths: $this->resource_locator->getLastSearchedPaths(),
+                "Included view source '{$source}' not found", extra: [
+                    "searched_paths" => $this->resource_locator->getLastSearchedPaths(),
+                ],
             );
         }
 
@@ -264,8 +266,9 @@ class Html
 
         if (is_null($source_file)) {
             throw new ResourceNotFoundException(
-                "Included layout source '{$source}' not found",
-                paths: $this->resource_locator->getLastSearchedPaths(),
+                "Included layout source '{$source}' not found", extra: [
+                    "searched_paths" => $this->resource_locator->getLastSearchedPaths(),
+                ],
             );
         }
 
