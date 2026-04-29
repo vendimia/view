@@ -66,17 +66,19 @@ class View
     /**
      * Sets a layout file source
      */
-    public function setLayout($file)
+    public function setLayout($file): self
     {
         $this->layout = $file;
+        return $this;
     }
 
     /**
      * Adds $args to the argument list
      */
-    public function addArguments(array $args)
+    public function addArguments(array $args): self
     {
         $this->args = [...$this->args, ...$args];
+        return $this;
     }
 
     public function render(): string
